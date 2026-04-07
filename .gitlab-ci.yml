@@ -1,0 +1,13 @@
+stages:
+  - check
+
+check-formatting:
+  stage: check
+  image: eclipse-temurin:21-jdk
+  cache:
+    paths:
+      - .m2/repository
+  variables:
+    MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  script:
+    - ./mvnw spring-javaformat:validate
