@@ -32,3 +32,4 @@ This project was contributed to by LLMs. Contributors are more than welcome to u
 
 * they are wholly responsible for the output
 * they are able to understand and explain the changes they've made.
+* commit messages containing LLM contributed code contain a co-authorship credit.
