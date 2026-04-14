@@ -20,13 +20,16 @@ public class SecurityConfig {
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http.authorizeHttpRequests(auth -> {
-			// Allow all requests to health endpoints
+			// Allow all requests to health endpoint
 			auth.requestMatchers("/actuator/health")
+				.permitAll()
+				// Allow all requests to docs endpoints
+				.requestMatchers("/docs", "/docs/**")
 				.permitAll()
 				// All actuator requests need to be from a Wheel member
 				.requestMatchers("/actuator/**")
 				.hasAuthority("WHEEL")
-				// Everything needs a token from keycloak.
+				// Everything else needs a token from keycloak.
 				.anyRequest()
 				.authenticated();
 		})
