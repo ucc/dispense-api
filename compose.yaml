@@ -1,0 +1,5 @@
+services:
+  dispense-server:
+    build: docker/dispense-server
+    ports:
+      - "11021:11021"

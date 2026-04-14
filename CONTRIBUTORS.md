@@ -1,3 +1,4 @@
+# API Endpoints
 Endpoints are defined in DispenseController.
 
 Each endpoint is a method with one or more annotations. The annotations are used by Spring to define the path to the endpoint, the HTTP verb used to access it, and any authentication requirements.
@@ -21,3 +22,16 @@ For development, you can get a token by using `tools/get_token`. You then pass i
 Security configuration is in SecurityConfig. All endpoints require a token except for health checks.
 
 Each token is automatically mapped into an `UccUser` which then gets passed to every endpoint by default.
+
+# Developer Environment
+Dependencies for `dispense-api` are individual docker containers stored in `docker/`.
+
+A compose file in the root starts them up.
+To run everything:
+```sh
+cd dispense-api/
+docker compose up --build
+```
+
+## IDE
+I like to use IntelliJ. Open up the `pom.xml` inside the repo and you're off to the races :)
