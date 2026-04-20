@@ -1,0 +1,158 @@
+{
+  "realm": "ucc",
+  "enabled": true,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "groups": [
+    {"name": "gumby"},
+    {"name": "committee"},
+    {"name": "door"},
+    {"name": "wheel"}
+  ],
+  "clients": [
+    {
+      "clientId": "dispense-api",
+      "enabled": true,
+      "publicClient": true,
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true,
+      "fullScopeAllowed": true,
+      "redirectUris": ["*"],
+      "webOrigins": ["*"],
+      "protocolMappers": [
+        {
+          "name": "username",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-property-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "username",
+            "claim.name": "preferred_username",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "full name",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-full-name-mapper",
+          "consentRequired": false,
+          "config": {
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "given name",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-property-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "firstName",
+            "claim.name": "given_name",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "family name",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-property-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "lastName",
+            "claim.name": "family_name",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "email",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-property-mapper",
+          "consentRequired": false,
+          "config": {
+            "user.attribute": "email",
+            "claim.name": "email",
+            "jsonType.label": "String",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "usergroups",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-group-membership-mapper",
+          "consentRequired": false,
+          "config": {
+            "full.path": "false",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "claim.name": "usergroups",
+            "userinfo.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "alice",
+      "enabled": true,
+      "firstName": "Alice",
+      "lastName": "Committee",
+      "email": "alice@test.ucc.asn.au",
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "password", "temporary": false}],
+      "groups": ["/committee"]
+    },
+    {
+      "username": "bob",
+      "enabled": true,
+      "firstName": "Bob",
+      "lastName": "Door",
+      "email": "bob@test.ucc.asn.au",
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "password", "temporary": false}],
+      "groups": ["/door"]
+    },
+    {
+      "username": "charlie",
+      "enabled": true,
+      "firstName": "Charlie",
+      "lastName": "Wheel",
+      "email": "charlie@test.ucc.asn.au",
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "password", "temporary": false}],
+      "groups": ["/wheel"]
+    },
+    {
+      "username": "dave",
+      "enabled": true,
+      "firstName": "Dave",
+      "lastName": "Gumby",
+      "email": "dave@test.ucc.asn.au",
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "password", "temporary": false}],
+      "groups": ["/gumby"]
+    },
+    {
+      "username": "eve",
+      "enabled": true,
+      "firstName": "Eve",
+      "lastName": "All",
+      "email": "eve@test.ucc.asn.au",
+      "emailVerified": true,
+      "credentials": [{"type": "password", "value": "password", "temporary": false}],
+      "groups": ["/committee", "/door", "/wheel"]
+    }
+  ]
+}

@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python2-dev \
     python-is-python3 \
     screen \
+    sqlite3 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN git clone https://gitlab.ucc.asn.au/UCC/OpenDispense2.git /usr/src/OpenDispense2
@@ -28,11 +29,11 @@ RUN git clone https://gitlab.ucc.asn.au/UCC/virtualcoke.git /usr/src/virtualcoke
 COPY dispsrv.conf /usr/src/OpenDispense2/dispsrv.conf
 RUN mkdir -p /etc/opendispense
 COPY client.conf /etc/opendispense/client.conf
+COPY entrypoint.sh /usr/src/OpenDispense2/entrypoint.sh
+RUN chmod +x /usr/src/OpenDispense2/entrypoint.sh
 
 WORKDIR /usr/src/OpenDispense2
 ENV TERM=xterm
 EXPOSE 11021
 
-# Start virtualcoke in a detached screen session (needs a virtual terminal for ncurses),
-# then run the dispense server in the foreground
-CMD ["sh", "-c", "screen -dmS virtualcoke python2 ../virtualcoke/virtualcoke.py && exec ./dispsrv"]
+ENTRYPOINT ["./entrypoint.sh"]
